@@ -1,17 +1,17 @@
-# json-schema-validator
+# @chaochow/json-schema-validator
 
 Package that validates JSON against JSON Schema
 
 ## Install
 
 ```sh
-npm install json-schema-validator
+npm install @chaochow/json-schema-validator
 ```
 
 ## Usage
 
 ```ts
-import { hello } from 'json-schema-validator';
+import { hello } from '@chaochow/json-schema-validator';
 
 hello(); // Hello, world!
 ```
