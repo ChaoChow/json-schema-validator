@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+files=$(git diff --cached --name-only --diff-filter=ACM -- '*.ts' '*.js' '*.json' '*.md')
+[ -z "$files" ] && exit 0
+npx prettier --write $files
+code_files=$(echo "$files" | grep -E '\.(ts|js)$' || true)
+[ -n "$code_files" ] && npx eslint --fix $code_files
+git add $files
