@@ -32,15 +32,15 @@
   ],
   "sideEffects": false,
   "engines": {
-    "node": ">=22.12"
+    "node": ">=16.9"
   },
   "packageManager": "npm@12.0.2",
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "scripts": {
     "prepare": "git config core.hooksPath .githooks",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json --removeComments && tsc -p tsconfig.build.json --emitDeclarationOnly",
     "clean": "rm -rf dist coverage",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
@@ -52,17 +52,24 @@
     "test:coverage": "vitest run --coverage",
     "check": "npm run typecheck && npm run lint && npm run format:check && npm run test:coverage",
     "prepublishOnly": "npm run clean && npm run check && npm run build",
-    "publish:npm": "npm publish"
+    "publish:npm": "npm publish",
+    "bench": "npm run build && vitest bench --run",
+    "size": "npm run build && npm pack --dry-run --json 2>/dev/null | node -e \"const p=Object.values(JSON.parse(require('fs').readFileSync(0)))[0];const kb=n=>(n/1024).toFixed(1).padStart(7)+' kB';for(const f of p.files)console.log(kb(f.size),f.path);console.log(kb(p.unpackedSize),'unpacked');console.log(kb(p.size),'tarball (gzip)')\""
   },
   "devDependencies": {
+    "@cfworker/json-schema": "^4.1.1",
     "@eslint/js": "^10.0.1",
     "@types/node": "^22.20.2",
     "@vitest/coverage-v8": "^5.0.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",
+    "json-schema-test-suite": "github:json-schema-org/JSON-Schema-Test-Suite#1d82f70b87bba8c6f5d47b6b7e256401215d635b",
     "prettier": "^3.9.6",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.70.0",
-    "vitest": "^5.0.0"
+    "vitest": "^5.0.0",
+    "zod": "^4.6.5"
   }
 }

@@ -22,3 +22,9 @@ npm-debug.log*
 
 # OS
 .DS_Store
+
+# All Plans
+plan/
+
+# Benchmarks
+bench/
