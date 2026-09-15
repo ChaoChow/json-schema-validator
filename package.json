@@ -1,6 +1,6 @@
 {
   "name": "@chaochow/json-schema-validator",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Package that validates JSON against JSON Schema",
   "author": "Qiaochu Tang",
   "license": "MIT",
